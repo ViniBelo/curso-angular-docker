@@ -20,6 +20,7 @@ import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-
 import { OrderService } from './order/order.service';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -40,9 +41,10 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     HttpModule,
     SharedModule,
+    CoreModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
