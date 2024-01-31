@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { MEAT_API } from "app/app.api";
 import { Observable } from "rxjs";
 import { User } from "./user.model";
+import { tap, filter} from 'rxjs/operators'
 import { NavigationEnd, Router } from "@angular/router";
 
 @Injectable()
@@ -22,7 +23,7 @@ export class LoginService {
 
     login(email: string, password: string): Observable<User> {
         return this.http.post<User>(`${MEAT_API}/login`, {email: email, password: password})
-            .do(user => this.user = user)
+            .pipe(tap(user => this.user = user))
     }
 
     logout() {
