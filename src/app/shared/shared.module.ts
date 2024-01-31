@@ -12,6 +12,8 @@ import { NotificationService } from "./messages/notification.service";
 import { LoginService } from "app/security/login/login.service";
 import { LoggedInGuard } from "app/security/loggedin.guard";
 import { LeaveOrderGuard } from "app/order/leave-order.guard";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "app/security/auth.interceptor";
 
 @NgModule({
     declarations: [InputComponent, RadioComponent, SnackbarComponent, RatingComponent, SnackbarComponent],
@@ -22,7 +24,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers:[ShoppingCartService, RestaurantService, OrderService, NotificationService, LoginService, LoggedInGuard, LeaveOrderGuard]
+            providers:[ShoppingCartService, RestaurantService, OrderService, NotificationService, LoginService, LoggedInGuard, LeaveOrderGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
         }
     }
 }
